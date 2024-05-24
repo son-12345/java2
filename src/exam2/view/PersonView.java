@@ -30,29 +30,38 @@ public class PersonView {
         System.out.println("Phone Number: ");
         String phone_number = sc.nextLine();
 
-        Person persons = new Person(id, name, company, email, phone_number);
-        personController.createProductController(persons);
+        Person person = new Person(id, name, company, email, phone_number);
+        personController.createPersonController(person);  // Đổi tên phương thức gọi
     }
 
     public void getAllPersons() throws SQLException {
-        List<Person> allProducts = personController.getALLProductController(productName);
-        allProducts.forEach(person -> {
-            System.out.println("===Product Information===");
-            System.out.println(person.getId());
-            System.out.println(person.getName());
-            System.out.println(person.getCompany());
-            System.out.println(person.getEmail());
-            System.out.println(person.getPhone());
+        List<Person> allPersons = personController.getAllPersonsController();  // Đổi tên biến cho rõ ràng
+        allPersons.forEach(person -> {
+            System.out.println("=== Person Information ===");
+            System.out.println("ID: " + person.getId());
+            System.out.println("Name: " + person.getName());
+            System.out.println("Company: " + person.getCompany());
+            System.out.println("Email: " + person.getEmail());
+            System.out.println("Phone: " + person.getPhone());
         });
     }
+
     public void getPersonByIdName() throws SQLException {
-        PersonController productbyname = new PersonController();
-        System.out.println("=== Product Contact by Id ===");
-        System.out.print("Enter id to search: ");
-        String productName = sc.nextLine();
+        System.out.println("=== Person Information by Name ===");
+        System.out.print("Enter name to search: ");
+        String personName = sc.nextLine();
 
         try {
-            productbyname.getALLProductController(productName);
+            Person person = personController.findPersonByName(personName);  // Đổi tên biến cho rõ ràng
+            if (person != null) {
+                System.out.println("ID: " + person.getId());
+                System.out.println("Name: " + person.getName());
+                System.out.println("Company: " + person.getCompany());
+                System.out.println("Email: " + person.getEmail());
+                System.out.println("Phone: " + person.getPhone());
+            } else {
+                System.out.println("Person not found with name: " + personName);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

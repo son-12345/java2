@@ -11,14 +11,16 @@ public class PersonController {
 
     public PersonController() throws SQLException {
     }
-    public ArrayList<Person> getALLProductController(String productName) throws SQLException{
+
+    public ArrayList<Person> getAllPersonsController() throws SQLException {
         return personDAO.getAllPersons();
     }
-    public void createProductController(Person product) throws SQLException{
-        personDAO.createPerson(product);
-    }
-    public Person findPersonByName(String personName) throws SQLException {
-        return personDAO.getProductByName(Integer.parseInt(personName));
 
+    public void createPersonController(Person person) throws SQLException { // Đổi tên tham số thành person
+        personDAO.createPerson(person);
+    }
+
+    public Person findPersonByName(String personContactName) throws SQLException {
+        return personDAO.getPersontByName(personContactName);
     }
 }
